@@ -1,0 +1,19 @@
+<!doctype html>
+<title>AD Change Password</title>
+
+<div class=page>
+
+<h1>Change password</h1>
+
+<form action="{{ url_for('chpasswd_change') }}" method="post">
+  <dl>
+    <dt>Title:
+      <dd><input type="text" size=30 name="user">
+      <dd><input size=30 name="old_pass" type="password">
+      <dd><input size=30 name="new_pass1" type="password">
+      <dd><input size=30 name="new_pass2" type="password">
+      <dd><input type="submit" value="submit">
+  </dl>
+</form>
+
+</div>
