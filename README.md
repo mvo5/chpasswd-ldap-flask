@@ -22,7 +22,9 @@ Adjust config.py:
 $ vi config.py
 ```
 
-Configure apache to use "chpasswd.wsgi"
+Configure apache to use "chpasswd.wsgi" in a https context, the
+service will not run on plain http because of the security
+implications it has.
 
 
 To run the tests:

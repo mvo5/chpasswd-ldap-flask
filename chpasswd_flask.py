@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 from flask import (
-    Flask,
     request,
     render_template,
+    Flask,
 )
 
 from chpasswd import chpasswd_ad
@@ -14,7 +14,16 @@ from config import (
 
 
 app = Flask(__name__)
-app.debug = True
+#app.config["TESTING"] = True
+
+
+def ensure_https():
+    from werkzeug.exceptions import BadRequest
+    if not app.config['TESTING'] and not request.url.startswith("https"):
+        raise BadRequest("This service needs https")
+# register https check
+app.before_request(ensure_https)
+
 
 @app.route("/")
 def chpasswd_prompt():

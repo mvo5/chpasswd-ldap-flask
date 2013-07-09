@@ -17,6 +17,11 @@ class FlaskrTestCase(unittest.TestCase):
         res = self.app.get("/")
         self.assertTrue("Change Password" in res.data)
 
+    def test_chpasswd_production_needs_https(self):
+        chpasswd_flask.app.config['TESTING'] = False
+        res = self.app.get("/")
+        self.assertTrue(res.data.endswith("This service needs https\n"))
+
     def test_chpasswd_change_not_match(self):
         res = self.app.post("/change",
                             data={"user": "user1",
