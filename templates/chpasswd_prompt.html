@@ -1,35 +1,65 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<div class="container">
-
-<form action="{{ url_for('chpasswd_change') }}" method="post">
+<form action="{{ url_for('chpasswd_change') }}" method="post" class="form-horizontal">
   <fieldset>
-  <table>
-    <tr>
-      <td>Username:</td>
-      <td><input type="text" size=30 name="user"></td>
-    </tr>
-    <tr>
-      <td>Current Password</td>
-      <td><input size=30 name="old_pass" type="password"></td>
-    </tr>
-    
-    <tr>
-      <td>New Password</td>
-      <td><input size=30 name="new_pass1" type="password"></td>
-    </tr>
-    
-    <tr>
-      <td>New Password (repeat)</td>
-      <td><input size=30 name="new_pass2" type="password"></td>
-    </tr>
+    <legend>Change Password</legend>
 
-  </table>
-    <input type="submit" value="Change Password">
-    
+    <div class="control-group">
+      <label class="control-label" for="user">Username</label>
+      <div class="controls">
+        <input id="user" name="user" type="text" placeholder="Username" class="input-large" required="">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="old_pass">Current Password</label>
+      <div class="controls">
+        <input id="old_pass" name="old_pass" type="password" placeholder="Current Password" class="input-large" required="">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="new_pass1">New Password</label>
+      <div class="controls">
+        <input id="new_pass1" name="new_pass1" type="password" placeholder="New Password" class="input-large" required="">
+        <span class="help-inline" id="pwverdict"></span>
+        <div class="help-block input-large" id="pwstrength" style="padding-left: 6px; padding-right: 6px; padding-top: 15px;">
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="new_pass2">New Password (repeat)</label>
+      <div class="controls">
+        <input id="new_pass2" name="new_pass2" type="password" placeholder="New Password (repeat)" class="input-large" required="">
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary pull-right">Change Password</button>
+    </div>
   </fieldset>
 </form>
-</div>
+{% endblock %}
 
+{% block js %}
+<script type="text/javascript" src="{{ url_for('static', filename='pwstrength.js') }}"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+      var options = {
+          usernameField: '#user',
+          viewports: {
+            verdict: '#pwverdict',
+            progress: '#pwstrength'
+          },
+          onKeyUp: function (evt) {
+            //$(evt.target).pwstrength("outputErrorList");
+            console.log('evt', evt);
+          }
+      };
+      $('#new_pass1').pwstrength(options);
+  });
+</script>
 {% endblock %}
