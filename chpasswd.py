@@ -43,7 +43,7 @@ def get_ad_server(domain):
 
 def chpasswd_ad(domain, user, old_pass, new_pass):
     server = get_ad_server(domain)
-    return chpasswd_ad_lowlevel(server, user, old_password, passwd_new1)
+    return chpasswd_ad_lowlevel(server, user, old_pass, new_pass)
 
 
 def chpasswd_ad_lowlevel(server, user, old_pass, new_pass):
