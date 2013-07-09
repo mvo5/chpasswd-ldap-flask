@@ -26,6 +26,12 @@ Configure apache to use "chpasswd.wsgi" in a https context, the
 service will not run on plain http because of the security
 implications it has.
 
+To test-run locally:
+--------------------
+```
+$ CHPASSWD_AD_DEBUG=1 python chpasswd_flask.py
+```
+
 
 To run the tests:
 -----------------

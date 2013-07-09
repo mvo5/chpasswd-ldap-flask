@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import os
+
 from flask import (
     request,
     render_template,
@@ -14,8 +16,7 @@ from config import (
 
 
 app = Flask(__name__)
-#app.config["TESTING"] = True
-
+app.config["TESTING"] = "CHPASSWD_AD_DEBUG" in os.environ
 
 def ensure_https():
     from werkzeug.exceptions import BadRequest
