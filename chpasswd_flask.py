@@ -12,7 +12,6 @@ from flask import (
 
 from chpasswd import chpasswd_ad
 from config import (
-    SERVER,
     DOMAIN,
     MIN_PASSWORD_SIZE,
 )
@@ -50,7 +49,7 @@ def chpasswd_change():
 
     # now do the actual change
     try:
-        chpasswd_ad(SERVER, 
+        chpasswd_ad(DOMAIN, 
                     user,
                     request.form["old_pass"], 
                     request.form["new_pass1"])

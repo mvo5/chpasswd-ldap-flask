@@ -9,7 +9,7 @@ To install:
 
 Install dependencies:
 ```
-$ sudo apt-get install python-flask
+$ sudo apt-get install python-flask python-dnspython
 ```
 
 Install web-dependencies:
@@ -45,4 +45,3 @@ To do:
 - rate-limit login attempts
 - make the html pretty *cough*
 - implement javascript for PW security indicator
-- implement auto-discovery via _ldap._tcp.$DOMAIN SRV records

@@ -8,6 +8,3 @@ MIN_PASSWORD_SIZE = 8
 # the domain of the AD
 DOMAIN="example.com"
 
-# the ldap server to use
-SERVER="ad.example.com"
-
