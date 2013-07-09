@@ -7,7 +7,7 @@ from flask import (
 )
 
 from chpasswd import chpasswd_ad
-SERVER="salomon.uni-trier.de"
+from config import SERVER
 
 
 app = Flask(__name__)

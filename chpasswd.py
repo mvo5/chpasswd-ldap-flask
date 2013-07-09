@@ -7,7 +7,8 @@ import ldap
 import ldap.modlist
 
 def chpasswd_ad(server, user, old_pass, new_pass):
-    # or simply: 
+    # we could simply use, but that has weaker transport security than
+    # using ldaps:
     # res = subprocess.Popen(["smbpasswd", "-r", server, "-U", user],
     #                        stdin=subprocess.PIPE)
 

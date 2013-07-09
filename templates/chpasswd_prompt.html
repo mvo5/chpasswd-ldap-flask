@@ -1,7 +1,7 @@
-<!doctype html>
-<title>AD Change Password</title>
+{% extends "layout.html" %}
+{% block body %}
 
-<h1>Change password</h1>
+<div class="container">
 
 <form action="{{ url_for('chpasswd_change') }}" method="post">
   <fieldset>
@@ -30,5 +30,6 @@
     
   </fieldset>
 </form>
-
 </div>
+
+{% endblock %}
