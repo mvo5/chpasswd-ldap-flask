@@ -15,7 +15,7 @@ class FlaskrTestCase(unittest.TestCase):
 
     def test_chpasswd_show(self):
         res = self.app.get("/")
-        self.assertTrue("Change password" in res.data)
+        self.assertTrue("Change Password" in res.data)
 
     def test_chpasswd_change_not_match(self):
         res = self.app.post("/change",
@@ -26,13 +26,23 @@ class FlaskrTestCase(unittest.TestCase):
                                   })
         self.assertEqual(res.data, "passwords don't match")
 
+    def test_chpasswd_change_too_short(self):
+        chpasswd_flask.MIN_PASSWORD_SIZE = 8
+        res = self.app.post("/change",
+                            data={"user": "user1",
+                                  "old_pass": "oldpass",
+                                  "new_pass1": "1234",
+                                  "new_pass2": "1234",
+                                  })
+        self.assertEqual(res.data, "password too short")
+
     @patch("chpasswd_flask.chpasswd_ad")
     def test_chpasswd_change(self, mock_chpasswd):
         res = self.app.post("/change",
                             data={"user": "user1",
                                   "old_pass": "oldpass",
-                                  "new_pass1": "new_pass",
-                                  "new_pass2": "new_pass",
+                                  "new_pass1": "new_pass123",
+                                  "new_pass2": "new_pass123",
                                   })
         self.assertEqual(res.data, "Password changed")
         mock_chpasswd.assert_called()

@@ -19,6 +19,15 @@ $ vi config.py
 Configure apache to use "chpasswd.wsgi"
 
 
+To run the tests:
+-----------------
+
+$ PYTHONPATH=. python test/test_app.py
+
+
 To do:
 ------
-Implement auto-discovery via _ldap._tcp.$DOMAIN SRV records
+
+- make the html pretty *cough*
+- implement javascript for PW security indicator
+- implement auto-discovery via _ldap._tcp.$DOMAIN SRV records
