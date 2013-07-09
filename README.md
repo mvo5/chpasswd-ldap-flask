@@ -41,7 +41,8 @@ $ PYTHONPATH=. python test/test_app.py
 
 To do:
 ------
-
+- logging
+- rate-limit login attempts
 - make the html pretty *cough*
 - implement javascript for PW security indicator
 - implement auto-discovery via _ldap._tcp.$DOMAIN SRV records

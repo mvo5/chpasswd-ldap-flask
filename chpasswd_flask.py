@@ -2,6 +2,8 @@
 
 import os
 
+import ldap
+
 from flask import (
     request,
     render_template,
@@ -11,6 +13,7 @@ from flask import (
 from chpasswd import chpasswd_ad
 from config import (
     SERVER,
+    DOMAIN,
     MIN_PASSWORD_SIZE,
 )
 
@@ -33,15 +36,25 @@ def chpasswd_prompt():
 
 @app.route("/change", methods=["POST"])
 def chpasswd_change():
+    # sanity checks
     if request.form["new_pass1"] != request.form["new_pass2"]:
         return "passwords don't match"
+
     if len(request.form["new_pass1"]) < MIN_PASSWORD_SIZE:
         return "password too short"
-    res = chpasswd_ad(SERVER, 
-                      request.form["user"], 
-                      request.form["old_pass"], 
-                      request.form["new_pass1"])
-    if not res:
+
+    # auto add domain if not given
+    (user, sep, domain) = request.form["user"].partition("@")
+    if not domain:
+        user = "%s@%s" % (user, DOMAIN)
+
+    # now do the actual change
+    try:
+        chpasswd_ad(SERVER, 
+                    user,
+                    request.form["old_pass"], 
+                    request.form["new_pass1"])
+    except ldap.LDAPError:
         return "Failed to change password"
     return "Password changed"
     

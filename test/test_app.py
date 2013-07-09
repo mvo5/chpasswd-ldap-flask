@@ -50,7 +50,8 @@ class FlaskrTestCase(unittest.TestCase):
                                   "new_pass2": "new_pass123",
                                   })
         self.assertEqual(res.data, "Password changed")
-        mock_chpasswd.assert_called()
+        mock_chpasswd.assert_called_with(
+            "ad.example.com", "user1@example.com", "oldpass", "new_pass123")
 
 
 if __name__ == '__main__':
